@@ -2,30 +2,30 @@ import os
 from os import path
 
 
-x = input('Spawner no.: ')
+x = input('Spawner no.: ') # Asks for ini file number
 
-n_vehicle_class = 1
-spawner_file_name = "spawner" + x
-if(path.isfile(spawner_file_name) == False):
+n_vehicle_class = 1 # Will be utilised for multiple vehicle support
+spawner_file_name = "spawner" + x # used for file name
+if(path.isfile(spawner_file_name) == False): # checks if file exists
     f = open(spawner_file_name + ".ini", "w")
     print("File created called " + str(spawner_file_name))
-    
-    thats_it = False
+
+    thats_it = False # Asking for multiple vehicles (to be implemented)
     while(thats_it == False):
         vehicle_name = input("What is the vehicle code? ")
         quantity_vehicles = input("How many? ")
-        finished = input('Another vehicle? Y or N')
+        finished = input('Another vehicle? Y or N') 
         if(finished.lower() == 'y'):
             thats_it = False
         if(finished.lower() == 'n'):
             thats_it = True
             n_vehicle_class = n_vehicle_class + 1
-        else:
+        else: #catches responses that aren't Y/N
             finished = input("Didn't catch that. Try again. Another vehicle (Y or N)? ")
         
     f.write("[core]\n") #line 1
     f.write("name: " + spawner_file_name + "\n") #line 2
-    f.write("displayText: " + spawner_file_name[:7].upper() +" "+ spawner_file_name[7:8] + "\n") #line 3
+    f.write("displayText: " + spawner_file_name[0:1].upper() + spawner_file_name[1:7] +" "+ spawner_file_name[7:8] + "\n") #line 3
     f.write("displayDescription: Spawns \\n - " + vehicle_name + " x " + quantity_vehicles + "\n") #line 4
     f.write("class: CustomUnitMetadata\n") #line 5
     f.write("price: 0\n") #line 6
